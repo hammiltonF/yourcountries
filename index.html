@@ -70,7 +70,7 @@ const OCEANS=[
  // Put labels in open water and duplicate the Pacific label on both world edges.
  {name:'Тихий океан',point:[-140,-1],size:13},{name:'Тихий океан',point:[140,-1],size:13},
  {name:'Атлантический океан',point:[-42,1],size:12},{name:'Индийский океан',point:[82,-24],size:12},
- {name:'Северный Ледовитый океан',point:[0,81],size:11},{name:'Южный океан',point:[20,-60],size:11}
+ {name:'Северный Ледовитый океан',point:[0,71],size:12},{name:'Южный океан',point:[20,-60],size:11}
 ];
 const nameKey=s=>String(s||'').normalize('NFKC').toLocaleLowerCase('ru').replace(/[’']/g,"'").replace(/[^\p{L}\p{N}]+/gu,' ').trim();
 const CONTINENT_SETS=Object.fromEntries(Object.entries(CONTINENT_NAMES).map(([k,v])=>[k,new Set(v.split('|').map(nameKey))]));
