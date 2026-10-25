@@ -33,6 +33,19 @@ jobs:
               raise SystemExit("No inline JavaScript found in index.html")
           for number, script in enumerate(scripts, 1):
               pathlib.Path(f"/tmp/site-script-{number}.js").write_text(script, encoding="utf-8")
+
+          required_match = re.search(r"const REQUIRED_STATE_IDS=new Set\(`([^\`]*)`\.split", html)
+          translations_match = re.search(r"const STATE_RU_BY_ID=\{([\s\S]*?)\n\};", html)
+          if not required_match or not translations_match:
+              raise SystemExit("Missing the 195-state reference list or Russian translation map")
+          required = set(required_match.group(1).split())
+          translations = dict(re.findall(r"'(\d+)'\s*:\s*'([^']+)'", translations_match.group(1)))
+          missing = sorted(required - set(translations))
+          extra = sorted(set(translations) - required)
+          non_russian = sorted(code for code in required if code in translations and not re.search(r"[А-Яа-яЁё]", translations[code]))
+          if len(required) != 195 or missing or extra or non_russian:
+              raise SystemExit(f"Russian translation audit failed: required={len(required)}, missing={missing}, extra={extra}, non_russian={non_russian}")
+          print(f"Russian translation audit passed for all {len(required)} states")
           print(f"Checking {len(scripts)} inline JavaScript block(s)")
           PY
           for file in /tmp/site-script-*.js; do node --check "$file"; done
