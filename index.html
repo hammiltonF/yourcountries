@@ -122,7 +122,23 @@ const TERRITORY_CONTINENT_OVERRIDES={
  'fr guinea':'Южная Америка','s antarctic lands':'Антарктида',
  'n cyprus':'Азия','sahara':'Африка'
 };
-function continentsFor(id,en){
+function territoryContinentFromGeometry(feature,en){
+ // Sovereign states use explicit code tables above. This last-resort estimate is only for small dependencies/territories
+ // that lack a curated alias; their label is still shown in diagnostics if no sensible region can be inferred.
+ if(!feature||!feature.geometry||!window.d3)return null;
+ const [lon,lat]=d3.geoCentroid(feature);
+ if(!Number.isFinite(lon)||!Number.isFinite(lat))return null;
+ if(nameKey(en).includes('antarctic')||lat < -66)return 'Антарктида';
+ if(lon>-25&&lon<60&&lat>-38&&lat<37)return 'Африка';
+ if(lon>-27&&lon<45&&lat>=35)return 'Европа';
+ if(lon<-30&&lat<0)return 'Южная Америка';
+ if(lon<-30&&lat>=0)return 'Северная Америка';
+ if(lon>110&&(lat<15||lon>145))return 'Океания';
+ if(lon>=25&&lon<=180)return 'Азия';
+ if(lat<-25)return 'Океания';
+ return null;
+}
+function continentsFor(id,en,feature){
  const code=idOf(id);
  const primary=STATE_CONTINENT_BY_ID.get(code);
  const assigned=[];
@@ -133,8 +149,9 @@ function continentsFor(id,en){
  const override=TERRITORY_CONTINENT_OVERRIDES[name];
  if(override)return [override];
  for(const region of CONTINENTS){if(CONTINENT_SETS[region.label].has(name))assigned.push(region.label);}
- // A few regions are represented by both a short Natural Earth label and a fuller translation.
- return [...new Set(assigned)];
+ if(assigned.length)return [...new Set(assigned)];
+ const estimated=territoryContinentFromGeometry(feature,en);if(estimated)return [estimated];
+ return [];
 }
 
 const normalizeId=v=>String(v??'').replace(/^0+(?=\d)/,'');
@@ -366,7 +383,7 @@ async function start(){
    if(duplicateName)duplicateNames++;else seenNames.set(nk,id);
    const displayedEn=duplicateName?canonical+' (объект '+id+')':canonical;
    const ru=ruName(canonical)+(duplicateName?' (объект '+id+')':'');
-   const continents=continentsFor(id,canonical);const continent=continents[0]||'Не определён';const isState=REQUIRED_STATE_IDS.has(id);
+   const continents=continentsFor(id,canonical,f);const continent=continents[0]||'Не определён';const isState=REQUIRED_STATE_IDS.has(id);
    const entry={id,sourceId,en:displayedEn,sourceEn:canonical,ru,continent,continents,isState,feature:f};
    entries.push(entry);f.__trackerEntry=entry;validFeatures.push(f);
   }
