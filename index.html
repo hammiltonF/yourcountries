@@ -78,6 +78,28 @@ const STATE_CONTINENT_CODE_GROUPS={
  'Южная Америка':'032 068 076 152 170 218 328 600 604 740 858 862',
  'Океания':'036 242 296 584 583 520 554 585 598 882 090 776 798 548'
 };
+const STATE_RU_BY_ID={
+ '4':'Афганистан','8':'Албания','12':'Алжир','20':'Андорра','24':'Ангола','28':'Антигуа и Барбуда','32':'Аргентина','51':'Армения','36':'Австралия','40':'Австрия',
+ '31':'Азербайджан','44':'Багамы','48':'Бахрейн','50':'Бангладеш','52':'Барбадос','112':'Беларусь','56':'Бельгия','84':'Белиз','204':'Бенин','64':'Бутан','68':'Боливия',
+ '70':'Босния и Герцеговина','72':'Ботсвана','76':'Бразилия','96':'Бруней','100':'Болгария','854':'Буркина-Фасо','108':'Бурунди','132':'Кабо-Верде','116':'Камбоджа','120':'Камерун',
+ '124':'Канада','140':'Центральноафриканская Республика','148':'Чад','152':'Чили','156':'Китай','170':'Колумбия','174':'Коморы','178':'Республика Конго','180':'Демократическая Республика Конго','188':'Коста-Рика',
+ '384':'Кот-д’Ивуар','191':'Хорватия','192':'Куба','196':'Кипр','203':'Чехия','208':'Дания','262':'Джибути','212':'Доминика','214':'Доминиканская Республика','218':'Эквадор',
+ '818':'Египет','222':'Сальвадор','226':'Экваториальная Гвинея','232':'Эритрея','233':'Эстония','231':'Эфиопия','242':'Фиджи','246':'Финляндия','250':'Франция','266':'Габон',
+ '270':'Гамбия','268':'Грузия','276':'Германия','288':'Гана','300':'Греция','308':'Гренада','320':'Гватемала','324':'Гвинея','624':'Гвинея-Бисау','328':'Гайана',
+ '332':'Гаити','340':'Гондурас','348':'Венгрия','352':'Исландия','356':'Индия','360':'Индонезия','364':'Иран','368':'Ирак','372':'Ирландия','376':'Израиль',
+ '380':'Италия','388':'Ямайка','392':'Япония','400':'Иордания','398':'Казахстан','404':'Кения','296':'Кирибати','408':'Северная Корея','410':'Южная Корея','414':'Кувейт',
+ '417':'Кыргызстан','418':'Лаос','428':'Латвия','422':'Ливан','426':'Лесото','430':'Либерия','434':'Ливия','438':'Лихтенштейн','440':'Литва','442':'Люксембург',
+ '450':'Мадагаскар','454':'Малави','458':'Малайзия','462':'Мальдивы','466':'Мали','470':'Мальта','584':'Маршалловы Острова','478':'Мавритания','480':'Маврикий','484':'Мексика',
+ '583':'Федеративные Штаты Микронезии','498':'Молдова','492':'Монако','496':'Монголия','499':'Черногория','504':'Марокко','508':'Мозамбик','104':'Мьянма','516':'Намибия','520':'Науру',
+ '524':'Непал','528':'Нидерланды','554':'Новая Зеландия','558':'Никарагуа','562':'Нигер','566':'Нигерия','807':'Северная Македония','578':'Норвегия','512':'Оман','586':'Пакистан',
+ '585':'Палау','275':'Палестина','591':'Панама','598':'Папуа — Новая Гвинея','600':'Парагвай','604':'Перу','608':'Филиппины','616':'Польша','620':'Португалия','634':'Катар',
+ '642':'Румыния','643':'Россия','646':'Руанда','659':'Сент-Китс и Невис','662':'Сент-Люсия','670':'Сент-Винсент и Гренадины','882':'Самоа','674':'Сан-Марино','678':'Сан-Томе и Принсипи','682':'Саудовская Аравия',
+ '686':'Сенегал','688':'Сербия','690':'Сейшельские Острова','694':'Сьерра-Леоне','702':'Сингапур','703':'Словакия','705':'Словения','90':'Соломоновы Острова','706':'Сомали','710':'Южно-Африканская Республика',
+ '728':'Южный Судан','724':'Испания','144':'Шри-Ланка','729':'Судан','740':'Суринам','752':'Швеция','756':'Швейцария','760':'Сирия','762':'Таджикистан','834':'Танзания',
+ '764':'Таиланд','626':'Восточный Тимор','768':'Того','776':'Тонга','780':'Тринидад и Тобаго','788':'Тунис','792':'Турция','795':'Туркменистан','800':'Уганда','804':'Украина',
+ '784':'Объединённые Арабские Эмираты','826':'Великобритания','840':'США','858':'Уругвай','860':'Узбекистан','548':'Вануату','336':'Ватикан','862':'Венесуэла','704':'Вьетнам','887':'Йемен','894':'Замбия','716':'Зимбабве',
+ '748':'Эсватини','798':'Тувалу'
+};
 const STATE_FALLBACK_NAME_BY_ID={ '36':'Australia','242':'Fiji','296':'Kiribati','584':'Marshall Islands','583':'Micronesia','520':'Nauru','554':'New Zealand','585':'Palau','598':'Papua New Guinea','882':'Samoa','90':'Solomon Islands','776':'Tonga','798':'Tuvalu','548':'Vanuatu' };
 const STATE_CONTINENT_BY_ID=new Map();
 const DUPLICATE_STATE_CONTINENT_CODES=new Set();
@@ -157,7 +179,9 @@ const normalizeId=v=>String(v??'').replace(/^0+(?=\d)/,'');
 let entries=[], entryById=new Map(), selected=new Set(), features=[], pathSelection=null, markerSelection=null, worldSvg=null, zoomBehavior=null, currentFilter='all', currentScope='states', currentContinent=null, storageFailed=false;
 let loadStarted=false;
 try{const saved=JSON.parse(localStorage.getItem(STORE_KEY)||'[]');if(Array.isArray(saved))selected=new Set(saved.map(String));}catch(e){}
-function ruName(name){return RU[name]||name;}
+function translationKey(value){return String(value||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').normalize('NFKC').toLocaleLowerCase('ru').replace(/[’']/g,"'").replace(/[^\\p{L}\\p{N}]+/gu,' ').trim();}
+const RU_NORMALIZED=new Map(Object.entries(RU).map(([key,value])=>[translationKey(key),value]));
+function ruName(name){return RU[name]||RU_NORMALIZED.get(translationKey(name))||name;}
 function escapeText(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 function idOf(v){return normalizeId(v);}
 async function fetchFirst(urls,type){let last;for(const url of urls){try{const res=await fetch(url,{cache:'force-cache'});if(!res.ok)throw new Error('HTTP '+res.status);return type==='json'?await res.json():await res.text();}catch(e){last=e;}}throw last||new Error('download failed');}
@@ -387,7 +411,7 @@ async function start(){
    const canonical=en||('Объект '+sourceId);const nk=nameKey(canonical);const duplicateName=seenNames.has(nk);
    if(duplicateName)duplicateNames++;else seenNames.set(nk,id);
    const displayedEn=duplicateName?canonical+' (объект '+id+')':canonical;
-   const ru=ruName(canonical)+(duplicateName?' (объект '+id+')':'');
+   const ru=(STATE_RU_BY_ID[id]||ruName(canonical))+(duplicateName?' (объект '+id+')':'');
    const continents=continentsFor(id,canonical,f);const continent=continents[0]||'Не определён';const isState=REQUIRED_STATE_IDS.has(id);
    const entry={id,sourceId,en:displayedEn,sourceEn:canonical,ru,continent,continents,isState,feature:f};
    entries.push(entry);f.__trackerEntry=entry;validFeatures.push(f);
@@ -398,7 +422,7 @@ async function start(){
   for(const id of missingStateShapeIds){
    const en=STATE_FALLBACK_NAME_BY_ID[id]||('Государство (код '+id+')');
    const continents=continentsFor(id,en);const continent=continents[0]||'Не определён';
-   entries.push({id,en,sourceEn:en,ru:ruName(en),continent,continents,isState:true,mapGeometryMissing:true});
+   entries.push({id,en,sourceEn:en,ru:STATE_RU_BY_ID[id]||ruName(en),continent,continents,isState:true,mapGeometryMissing:true});
   }
   // Keep entries themselves ordered consistently too, so every list/export source starts alphabetically.
   entries.sort((a,b)=>a.ru.localeCompare(b.ru,'ru',{sensitivity:'base'})||a.ru.localeCompare(b.ru,'ru')||a.id.localeCompare(b.id,'en'));
