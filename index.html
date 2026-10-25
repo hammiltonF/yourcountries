@@ -11,8 +11,8 @@
 .header{padding:27px clamp(16px,4vw,48px) 22px;background:var(--paper);border-bottom:1px solid var(--line)}.header-inner{max-width:1600px;margin:auto;display:flex;align-items:center;gap:18px}.brand-icon{width:48px;height:48px;border-radius:15px;background:var(--soft);display:grid;place-items:center;font-size:25px;flex:none}h1{margin:0;font-size:clamp(25px,3vw,35px);line-height:1.15;letter-spacing:-.045em} .subtitle{color:var(--muted);margin:7px 0 0;font-size:14px}
 main{max-width:1600px;margin:auto;padding:20px clamp(10px,1.5vw,22px) 26px;display:grid;grid-template-columns:minmax(0,1.62fr) minmax(335px,.9fr);gap:18px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);min-width:0;overflow:hidden}.panel-title{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:17px 20px;border-bottom:1px solid var(--line)}.panel-title h2{font-size:16px;margin:0;letter-spacing:-.02em}.eyebrow{font-size:12px;color:var(--muted)}.map-stage{position:relative;background:var(--map);height:clamp(420px,61vh,730px);overflow:hidden}.map-stage:before{content:"";position:absolute;inset:0;pointer-events:none;background-image:radial-gradient(#fff 1px,transparent 1px);background-size:25px 25px;opacity:.5}#world-map{display:block;position:relative;width:100%;height:100%;touch-action:none;outline:none}.country-shape{fill:var(--land);stroke:#fff;stroke-width:.8;vector-effect:non-scaling-stroke;cursor:pointer;transition:fill .12s ease,filter .12s ease}.country-shape:hover{fill:#a9c9b0;filter:brightness(1.02)}.country-shape:focus{outline:none}.country-shape:focus-visible{stroke:#176b32;stroke-width:2.2;filter:drop-shadow(0 0 1px #fff)}.country-shape.selected{fill:var(--green);stroke:#fff;stroke-width:.85}.country-shape.selected:focus{outline:none}.country-shape.selected:hover{fill:var(--green-dark)}.country-shape.scope-muted:not(.selected){fill:#e7ece8;stroke:#f5f8f5}.country-shape.scope-muted.selected{fill:#a9cfb1}.map-tools{position:absolute;right:13px;top:13px;display:flex;flex-direction:column;gap:6px}.map-btn{width:36px;height:36px;border:1px solid #dce5dd;background:#fff;color:var(--ink);border-radius:11px;font-size:20px;display:grid;place-items:center;box-shadow:0 3px 10px #16391c12}.map-btn:hover{background:#f4faf5}.map-hint{position:absolute;bottom:13px;left:14px;max-width:calc(100% - 28px);border:1px solid #dce5dd;background:#ffffffeb;backdrop-filter:blur(8px);border-radius:12px;padding:8px 11px;color:#526258;font-size:12px;pointer-events:none}.map-footer{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:12px 18px;color:var(--muted);font-size:12px}.legend{display:flex;gap:13px;flex-wrap:wrap}.legend span{display:inline-flex;align-items:center;gap:6px}.swatch{display:inline-block;width:11px;height:11px;border-radius:3px;background:var(--land);border:1px solid #cdd8cf}.swatch.green{background:var(--green);border-color:var(--green)}
 .side{display:flex;flex-direction:column;min-height:0}.stats{padding:18px 19px 16px;border-bottom:1px solid var(--line)}.stats-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}.stats-label{font-size:13px;color:var(--muted)}.big-number{font-size:34px;font-weight:800;line-height:1.1;letter-spacing:-.05em;margin-top:4px}.percent-pill{color:var(--green-dark);background:var(--soft);padding:6px 9px;border-radius:10px;font-size:12px;font-weight:700;white-space:nowrap}.track{height:7px;background:#edf1ed;border-radius:20px;margin-top:15px;overflow:hidden}.fill{height:100%;width:0;background:var(--green);border-radius:20px;transition:width .18s}.stats-note{margin-top:8px;color:var(--muted);font-size:12px}.save-status{margin-top:8px;padding:7px 9px;border-radius:8px;background:#f5faf5;color:#52705b;font-size:11px;line-height:1.45}.save-status.warning{background:#fff7e8;color:#8c5b16}.scope-toggle{display:flex;gap:6px;padding:10px 14px 0}.scope-btn{flex:1;min-width:0;border:1px solid var(--line);background:#fff;color:var(--muted);padding:8px 6px;border-radius:9px;font-size:11px;font-weight:650}.scope-btn.active{background:var(--soft);border-color:#d8ebdc;color:var(--green-dark)}.scope-btn:hover{border-color:#b4d8bd}
-.search-wrap{position:relative;padding:13px 14px 10px;border-bottom:1px solid var(--line)}.search-icon{position:absolute;left:27px;top:25px;color:#809087;font-size:15px;pointer-events:none}.search{width:100%;border:1px solid #e0e8e1;border-radius:12px;padding:11px 12px 11px 37px;background:#fbfcfb;color:var(--ink);outline:none}.search:focus{border-color:#8bc99a;background:#fff}.filters{padding:10px 14px;display:flex;gap:6px;border-bottom:1px solid var(--line)}.filter-btn{border:1px solid transparent;background:transparent;color:var(--muted);padding:7px 10px;border-radius:9px;font-size:12px;flex:1;white-space:nowrap}.filter-btn.active{background:var(--soft);color:var(--green-dark);font-weight:700}.list-summary{padding:10px 17px 6px;display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.country-list{overflow:auto;min-height:240px;max-height:calc(61vh - 210px);scrollbar-width:thin;scrollbar-color:#ccd8ce transparent}.country-row{display:flex;align-items:center;gap:10px;padding:9px 17px;border-top:1px solid #f1f4f1;min-height:42px;cursor:pointer}.country-row:hover{background:#f8fbf8}.country-row[hidden]{display:none}.country-row input{width:16px;height:16px;accent-color:var(--green);margin:0;flex:none;cursor:pointer}.country-name{flex:1;min-width:0}.country-original{display:block;color:#8a968d;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.checked-label{font-size:10px;color:var(--green-dark);font-weight:750;letter-spacing:.035em}.checked-label:empty{display:none}.empty{padding:24px 18px;text-align:center;color:var(--muted);font-size:13px}.bottom-actions{display:flex;gap:8px;padding:13px 14px;border-top:1px solid var(--line);margin-top:auto}.btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 12px;border-radius:11px;font-size:12px;font-weight:650}.btn:hover{background:#f7faf7}.btn.primary{background:var(--green);border-color:var(--green);color:#fff;flex:1}.btn.primary:hover{background:var(--green-dark)}.load-state{padding:28px 20px;color:var(--muted);font-size:13px}.spinner{display:inline-block;width:14px;height:14px;border:2px solid #d8e6da;border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:7px}@keyframes spin{to{transform:rotate(360deg)}}.error-title{color:#9b3939;font-weight:700}.error-help{line-height:1.6;margin-top:8px}
-.continent-section{padding:14px 15px 15px;border-bottom:1px solid var(--line)}.continent-heading{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:10px}.continent-heading strong{font-size:13px}.continent-heading span{font-size:11px;color:var(--muted)}.continent-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.continent-card{border:1px solid #e6ede7;background:#fcfdfc;border-radius:11px;padding:9px 10px;min-width:0}.continent-card-top{display:flex;justify-content:space-between;gap:7px;align-items:baseline}.continent-name{font-size:12px;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.continent-count{font-size:11px;color:var(--muted);white-space:nowrap}.continent-track{height:4px;background:#e9efea;border-radius:8px;margin-top:7px;overflow:hidden}.continent-fill{height:100%;background:var(--green);border-radius:8px}.continent-detail{font-size:10px;color:var(--muted);margin-top:5px}.map-ocean-label{fill:#52796f;fill-opacity:1;font-family:system-ui,-apple-system,Segoe UI,sans-serif;font-style:normal;font-weight:650;letter-spacing:.2px;text-anchor:middle;pointer-events:none;paint-order:stroke;stroke:#eaf1eb;stroke-width:2px;stroke-linejoin:round}.backup-footnote{padding:0 14px 12px;font-size:11px;color:var(--muted);line-height:1.4}.bottom-actions{flex-wrap:wrap}.bottom-actions .btn{flex:1;min-width:105px}.bottom-actions .btn.primary{flex:1.4}.audit-note{padding:9px 15px;border-bottom:1px solid var(--line);font-size:11px;line-height:1.45;color:var(--muted);background:#fbfdfb}.audit-note.warning{color:#855a1a;background:#fffaf0}
+.search-wrap{position:relative;padding:13px 14px 10px;border-bottom:1px solid var(--line)}.search-icon{position:absolute;left:27px;top:25px;color:#809087;font-size:15px;pointer-events:none}.search{width:100%;border:1px solid #e0e8e1;border-radius:12px;padding:11px 12px 11px 37px;background:#fbfcfb;color:var(--ink);outline:none}.search:focus{border-color:#8bc99a;background:#fff}.filters{padding:10px 14px;display:flex;gap:6px;border-bottom:1px solid var(--line)}.filter-btn{border:1px solid transparent;background:transparent;color:var(--muted);padding:7px 10px;border-radius:9px;font-size:12px;flex:1;white-space:nowrap}.filter-btn.active{background:var(--soft);color:var(--green-dark);font-weight:700}.list-summary{padding:10px 17px 6px;display:flex;justify-content:space-between;color:var(--muted);font-size:12px}.country-list{overflow:auto;min-height:240px;max-height:calc(61vh - 210px);scrollbar-width:thin;scrollbar-color:#ccd8ce transparent}.country-row{display:flex;align-items:center;gap:10px;padding:9px 17px;border-top:1px solid #f1f4f1;min-height:42px;cursor:pointer}.country-row:hover{background:#f8fbf8}.country-row[hidden]{display:none}.country-row input{width:16px;height:16px;accent-color:var(--green);margin:0;flex:none;cursor:pointer}.country-name{flex:1;min-width:0}.country-original{display:block;color:#8a968d;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.country-map-missing{display:block;color:#91651b;font-size:10px;white-space:nowrap}.checked-label{font-size:10px;color:var(--green-dark);font-weight:750;letter-spacing:.035em}.checked-label:empty{display:none}.empty{padding:24px 18px;text-align:center;color:var(--muted);font-size:13px}.bottom-actions{display:flex;gap:8px;padding:13px 14px;border-top:1px solid var(--line);margin-top:auto}.btn{border:1px solid var(--line);background:#fff;color:var(--ink);padding:10px 12px;border-radius:11px;font-size:12px;font-weight:650}.btn:hover{background:#f7faf7}.btn.primary{background:var(--green);border-color:var(--green);color:#fff;flex:1}.btn.primary:hover{background:var(--green-dark)}.load-state{padding:28px 20px;color:var(--muted);font-size:13px}.spinner{display:inline-block;width:14px;height:14px;border:2px solid #d8e6da;border-top-color:var(--green);border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:7px}@keyframes spin{to{transform:rotate(360deg)}}.error-title{color:#9b3939;font-weight:700}.error-help{line-height:1.6;margin-top:8px}
+.continent-section{padding:14px 15px 15px;border-bottom:1px solid var(--line)}.continent-heading{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:10px}.continent-heading strong{font-size:13px}.continent-heading span{font-size:11px;color:var(--muted)}.continent-heading-actions{display:flex;align-items:center;justify-content:flex-end;gap:8px}.continent-clear{border:1px solid #d9e8dc;background:#f3faf4;color:var(--green-dark);padding:5px 8px;border-radius:8px;font-size:11px;font-weight:650;white-space:nowrap}.continent-clear[hidden]{display:none}.continent-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.continent-card{appearance:none;width:100%;text-align:left;font:inherit;color:inherit;cursor:pointer;border:1px solid #e6ede7;background:#fcfdfc;border-radius:11px;padding:9px 10px;min-width:0;transition:background .12s,border-color .12s,box-shadow .12s}.continent-card:hover{background:#f5fbf6;border-color:#c7dfcb}.continent-card.active{background:#edf8ef;border-color:#58b56f;box-shadow:0 0 0 1px #58b56f inset}.continent-card:focus-visible{outline:3px solid #7bc88e;outline-offset:2px}.continent-card-top{display:flex;justify-content:space-between;gap:7px;align-items:baseline}.continent-name{font-size:12px;font-weight:650;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.continent-count{font-size:11px;color:var(--muted);white-space:nowrap}.continent-track{height:4px;background:#e9efea;border-radius:8px;margin-top:7px;overflow:hidden}.continent-fill{height:100%;background:var(--green);border-radius:8px}.continent-detail{font-size:10px;color:var(--muted);margin-top:5px}.map-ocean-label{fill:#52796f;fill-opacity:1;font-family:system-ui,-apple-system,Segoe UI,sans-serif;font-style:normal;font-weight:650;letter-spacing:.2px;text-anchor:middle;pointer-events:none;paint-order:stroke;stroke:#eaf1eb;stroke-width:2px;stroke-linejoin:round}.backup-footnote{padding:0 14px 12px;font-size:11px;color:var(--muted);line-height:1.4}.bottom-actions{flex-wrap:wrap}.bottom-actions .btn{flex:1;min-width:105px}.bottom-actions .btn.primary{flex:1.4}.audit-note{padding:9px 15px;border-bottom:1px solid var(--line);font-size:11px;line-height:1.45;color:var(--muted);background:#fbfdfb}.audit-note.warning{color:#855a1a;background:#fffaf0}
 @media(max-width:900px){main{grid-template-columns:1fr;padding:12px;gap:12px}.map-stage{height:clamp(340px,53vw,550px)}.country-list{max-height:440px}.side{min-height:500px}.header{padding:21px 17px}}@media(max-width:480px){.brand-icon{width:42px;height:42px;font-size:22px}.header-inner{gap:12px}.subtitle{font-size:12px}.panel{border-radius:16px}.panel-title{padding:14px 15px}.map-stage{height:360px}.map-footer{padding:10px 13px;align-items:flex-start;flex-direction:column;gap:7px}.stats{padding:16px}.big-number{font-size:30px}.country-row{padding:10px 13px}.country-list{max-height:420px}}
 </style>
 </head>
@@ -31,7 +31,7 @@ main{max-width:1600px;margin:auto;padding:20px clamp(10px,1.5vw,22px) 26px;displ
 </section>
 <aside class="panel side" aria-label="Список стран и статистика">
  <div class="stats"><div class="stats-top"><div><div class="stats-label" id="stats-label">Отмечено среди государств</div><div class="big-number" id="count">0 / —</div></div><div class="percent-pill" id="percent">0% отмечено</div></div><div class="track"><div class="fill" id="progress"></div></div><div class="stats-note" id="stats-note">Отмечай страны, в которых ты уже был.</div><div class="save-status" id="save-status" role="status" aria-live="polite">Отметки сохраняются в этом браузере.</div></div>
- <section class="continent-section" aria-label="Статистика по континентам"><div class="continent-heading"><strong>По континентам</strong><span>посещено / всего</span></div><div id="continent-grid" class="continent-grid"><div class="continent-detail">Распределение появится после загрузки карты.</div></div></section>
+ <section class="continent-section" aria-label="Статистика по континентам"><div class="continent-heading"><strong>По континентам</strong><div class="continent-heading-actions"><span id="continent-caption">Нажми на регион, чтобы увидеть его страны</span><button class="continent-clear" id="clear-continent" hidden>Все регионы</button></div></div><div id="continent-grid" class="continent-grid"><div class="continent-detail">Распределение появится после загрузки карты.</div></div></section>
  <div class="search-wrap"><span class="search-icon">⌕</span><input class="search" id="search" type="search" placeholder="Найти страну…" autocomplete="off" aria-label="Поиск по странам"></div>
  <div class="scope-toggle" role="group" aria-label="Область списка и статистики"><button class="scope-btn active" data-scope="states">195 государств</button><button class="scope-btn" data-scope="all">Все объекты карты</button></div>
  <div class="filters" role="group" aria-label="Фильтр списка"><button class="filter-btn active" data-filter="all">Все</button><button class="filter-btn" data-filter="visited">Посещённые</button><button class="filter-btn" data-filter="unvisited">Не посещённые</button></div>
@@ -78,6 +78,7 @@ const STATE_CONTINENT_CODE_GROUPS={
  'Южная Америка':'032 068 076 152 170 218 328 600 604 740 858 862',
  'Океания':'036 242 296 584 583 520 554 585 598 882 090 776 798 548'
 };
+const STATE_FALLBACK_NAME_BY_ID={ '36':'Australia','242':'Fiji','296':'Kiribati','584':'Marshall Islands','583':'Micronesia','520':'Nauru','554':'New Zealand','585':'Palau','598':'Papua New Guinea','882':'Samoa','90':'Solomon Islands','776':'Tonga','798':'Tuvalu','548':'Vanuatu' };
 const STATE_CONTINENT_BY_ID=new Map();
 const DUPLICATE_STATE_CONTINENT_CODES=new Set();
 for(const [continent,codes] of Object.entries(STATE_CONTINENT_CODE_GROUPS)){
@@ -90,10 +91,12 @@ for(const [continent,codes] of Object.entries(STATE_CONTINENT_CODE_GROUPS)){
 const UNMAPPED_STATE_CONTINENT_CODES=[...REQUIRED_STATE_IDS].filter(id=>!STATE_CONTINENT_BY_ID.has(id));
 
 const OCEANS=[
- // Put labels in open water and duplicate the Pacific label on both world edges.
- {name:'Тихий океан',point:[-140,-1],size:13},{name:'Тихий океан',point:[140,-1],size:13},
- {name:'Атлантический океан',point:[-42,1],size:12},{name:'Индийский океан',point:[82,-24],size:12},
- {name:'Северный Ледовитый океан',point:[0,71],size:12},{name:'Южный океан',point:[20,-60],size:11}
+ {name:'Тихий океан',lines:['Тихий океан'],candidates:[[-155,0],[-150,-15],[-145,18],[-135,5]],size:13},
+ {name:'Тихий океан',lines:['Тихий океан'],candidates:[[155,0],[160,-15],[150,18],[145,-25]],size:13},
+ {name:'Атлантический океан',lines:['Атлантический','океан'],candidates:[[-32,5],[-30,18],[-35,-15],[-42,25],[-25,-28]],size:12},
+ {name:'Индийский океан',lines:['Индийский','океан'],candidates:[[82,-22],[75,-30],[90,-15],[65,-20],[90,-35]],size:12},
+ {name:'Северный Ледовитый океан',lines:['Северный','Ледовитый океан'],candidates:[[0,80],[-20,79],[20,79],[40,79],[-40,79],[60,78],[-55,78],[5,75]],size:12},
+ {name:'Южный океан',lines:['Южный океан'],candidates:[[20,-53],[80,-54],[-40,-54],[130,-53],[-120,-53],[30,-50]],size:11}
 ];
 const nameKey=s=>String(s||'').normalize('NFKC').toLocaleLowerCase('ru').replace(/[’']/g,"'").replace(/[^\p{L}\p{N}]+/gu,' ').trim();
 const CONTINENT_SETS=Object.fromEntries(Object.entries(CONTINENT_NAMES).map(([k,v])=>[k,new Set(v.split('|').map(nameKey))]));
@@ -106,7 +109,7 @@ function continentFor(id,en){
 }
 
 const normalizeId=v=>String(v??'').replace(/^0+(?=\d)/,'');
-let entries=[], entryById=new Map(), selected=new Set(), features=[], pathSelection=null, worldSvg=null, zoomBehavior=null, currentFilter='all', currentScope='states', storageFailed=false;
+let entries=[], entryById=new Map(), selected=new Set(), features=[], pathSelection=null, worldSvg=null, zoomBehavior=null, currentFilter='all', currentScope='states', currentContinent=null, storageFailed=false;
 let loadStarted=false;
 try{const saved=JSON.parse(localStorage.getItem(STORE_KEY)||'[]');if(Array.isArray(saved))selected=new Set(saved.map(String));}catch(e){}
 function ruName(name){return RU[name]||name;}
@@ -137,10 +140,10 @@ function buildList(){const list=$('#country-list');list.innerHTML='';const frag=
  // Always show country names in Russian alphabetical order (А—Я), regardless of source file order.
  const sortedEntries=[...entries].sort((a,b)=>a.ru.localeCompare(b.ru,'ru',{sensitivity:'base'})||a.ru.localeCompare(b.ru,'ru')||a.id.localeCompare(b.id,'en'));
  for(const e of sortedEntries){
-  const label=document.createElement('label');label.className='country-row';label.dataset.id=e.id;label.dataset.state=e.isState?'true':'false';label.dataset.name=(e.ru+' '+e.en).toLocaleLowerCase('ru');
+  const label=document.createElement('label');label.className='country-row';label.dataset.id=e.id;label.dataset.state=e.isState?'true':'false';label.dataset.continent=e.continent;label.dataset.name=(e.ru+' '+e.en).toLocaleLowerCase('ru');
   const cb=document.createElement('input');cb.type='checkbox';cb.checked=selected.has(e.id);cb.setAttribute('aria-label','Посещена: '+e.ru);cb.dataset.id=e.id;
   const name=document.createElement('span');name.className='country-name';name.textContent=e.ru;
-  if(e.ru!==e.en){const original=document.createElement('span');original.className='country-original';original.textContent=e.en;name.append(original);}
+  if(e.ru!==e.en){const original=document.createElement('span');original.className='country-original';original.textContent=e.en;name.append(original);}if(e.mapGeometryMissing){const missingShape=document.createElement('span');missingShape.className='country-map-missing';missingShape.textContent='Нет контура на карте — можно отметить в списке';name.append(missingShape);}
   const badge=document.createElement('span');badge.className='checked-label';badge.textContent=selected.has(e.id)?'ВЫБРАНА':'';
   cb.addEventListener('change',()=>toggle(e.id));
   label.append(cb,name,badge);frag.append(label);
@@ -148,10 +151,10 @@ function buildList(){const list=$('#country-list');list.innerHTML='';const frag=
  list.append(frag);applyFilter();updateUI();
 }
 function applyFilter(){const q=$('#search').value.trim().toLocaleLowerCase('ru');let visible=0;
- document.querySelectorAll('.country-row').forEach(row=>{const id=row.dataset.id;const isVisited=selected.has(id);const matchName=row.dataset.name.includes(q);const matchFilter=currentFilter==='all'||(currentFilter==='visited'&&isVisited)||(currentFilter==='unvisited'&&!isVisited);const matchScope=currentScope==='all'||row.dataset.state==='true';const show=matchScope&&matchName&&matchFilter;row.hidden=!show;if(show)visible++;});
+ document.querySelectorAll('.country-row').forEach(row=>{const id=row.dataset.id;const isVisited=selected.has(id);const matchName=row.dataset.name.includes(q);const matchFilter=currentFilter==='all'||(currentFilter==='visited'&&isVisited)||(currentFilter==='unvisited'&&!isVisited);const matchScope=currentScope==='all'||row.dataset.state==='true';const matchContinent=!currentContinent||row.dataset.continent===currentContinent;const show=matchScope&&matchContinent&&matchName&&matchFilter;row.hidden=!show;if(show)visible++;});
  const scopeTotal=entries.filter(e=>currentScope==='all'||e.isState).length;
  $('#shown').textContent=visible+' из '+scopeTotal;
- $('#list-scope-label').textContent=currentScope==='states'?'195 государств':'Все объекты карты';
+ $('#list-scope-label').textContent=(currentContinent?currentContinent+' · ':'')+(currentScope==='states'?'государства':'все объекты карты');
  let empty=$('#empty-results');if(!visible){if(!empty){empty=document.createElement('div');empty.id='empty-results';empty.className='empty';empty.textContent='Ничего не найдено. Попробуй изменить запрос.';$('#country-list').append(empty);}empty.hidden=false;}else if(empty)empty.hidden=true;
 }
 function updateUI(){const scopedEntries=entries.filter(e=>currentScope==='all'||e.isState);const total=scopedEntries.length,count=scopedEntries.filter(e=>selected.has(e.id)).length,pct=total?Math.round(count/total*100):0;
@@ -166,7 +169,7 @@ function updateUI(){const scopedEntries=entries.filter(e=>currentScope==='all'||
 function renderContinentStats(){
  const host=$('#continent-grid');if(!host||!entries.length)return;host.innerHTML='';const frag=document.createDocumentFragment();
  for(const c of CONTINENTS){const group=entries.filter(e=>(currentScope==='all'||e.isState)&&e.continent===c.label);const done=group.filter(e=>selected.has(e.id)).length;const pct=group.length?Math.round(done/group.length*100):0;
-  const card=document.createElement('div');card.className='continent-card';
+  const card=document.createElement('button');card.type='button';card.className='continent-card'+(currentContinent===c.label?' active':'');card.setAttribute('aria-pressed',currentContinent===c.label?'true':'false');card.setAttribute('aria-label','Показать страны и территории региона: '+c.label);card.addEventListener('click',()=>{currentContinent=currentContinent===c.label?null:c.label;updateUI();});
   const top=document.createElement('div');top.className='continent-card-top';
   const name=document.createElement('span');name.className='continent-name';name.textContent=c.label;
   const count=document.createElement('span');count.className='continent-count';count.textContent=done+' / '+group.length;
@@ -176,7 +179,7 @@ function renderContinentStats(){
  }
  const unknown=entries.filter(e=>(currentScope==='all'||e.isState)&&e.continent==='Не определён');
  if(unknown.length){const card=document.createElement('div');card.className='continent-card';card.textContent='Не определён: '+unknown.length;frag.append(card);}
- host.append(frag);
+ host.append(frag);const caption=$('#continent-caption');if(caption)caption.textContent=currentContinent?'Выбран регион: '+currentContinent:'Нажми на регион, чтобы увидеть его страны';const clear=$('#clear-continent');if(clear)clear.hidden=!currentContinent;
 }
 function plural(n,a,b,c){const x=n%10,y=n%100;if(x===1&&y!==11)return a;if(x>=2&&x<=4&&(y<12||y>14))return b;return c;}
 function toggle(id){id=String(id);if(selected.has(id))selected.delete(id);else selected.add(id);updateStorage();updateUI();const e=entryById.get(id);if(e)$('#map-status').textContent=e.ru+(selected.has(id)?' — посещена':' — отметка снята');}
@@ -191,21 +194,49 @@ function setupMap(validFeatures){
  const root=svg.append('g').attr('class','map-world-root');
  const copies=root.selectAll('g.world-copy').data([-worldWidth,0,worldWidth]).join('g')
    .attr('class','world-copy').attr('transform',offset=>'translate('+offset+',0)');
- // Ocean labels repeat with the wrapped world, but hide any label that would be cut by the viewport.
- // This avoids fragments at the left/right edges when the map is panned.
+ // Put each ocean label in open water. Candidate locations are tested along the full
+ // width of every text line against country polygons; labels on coasts or over land are rejected.
+ const countryFeatures=features.filter(f=>f.geometry);
  const oceanLabelNodes=[];
+ function labelStaysAtSea(point,item){
+   const anchor=projection(point);if(!anchor||!Number.isFinite(anchor[0])||!Number.isFinite(anchor[1]))return false;
+   const lines=item.lines||[item.name];const fontSize=item.size;
+   const maxChars=Math.max(...lines.map(line=>line.length));
+   const width=Math.max(maxChars*fontSize*.56,fontSize*4);
+   for(let lineIndex=0;lineIndex<lines.length;lineIndex++){
+     const y=anchor[1]+(lineIndex-(lines.length-1)/2)*fontSize*1.05;
+     for(let x=anchor[0]-width/2-4;x<=anchor[0]+width/2+4;x+=4){
+       const geo=projection.invert([x,y]);
+       if(!geo||geo[0]<-180||geo[0]>180||geo[1]<-90||geo[1]>90)return false;
+       for(const land of countryFeatures){if(d3.geoContains(land,geo))return false;}
+     }
+   }
+   return true;
+ }
+ for(const item of OCEANS){
+   item.point=(item.candidates||[]).find(point=>labelStaysAtSea(point,item))||null;
+ }
+ const safeOceanLabels=OCEANS.filter(item=>item.point);
  copies.each(function(offset){
    const labels=d3.select(this).append('g').attr('class','ocean-labels')
-     .selectAll('text').data(OCEANS).join('text')
+     .selectAll('text').data(safeOceanLabels).join('text')
      .attr('class','map-ocean-label')
      .attr('x',d=>projection(d.point)[0]).attr('y',d=>projection(d.point)[1])
-     .attr('font-size',d=>d.size).text(d=>d.name);
+     .attr('font-size',d=>d.size)
+     .each(function(d){
+       const text=d3.select(this);
+       text.selectAll('tspan').data(d.lines||[d.name]).join('tspan')
+         .attr('x',projection(d.point)[0])
+         .attr('dy',(line,i)=>i===0?-(d.lines.length-1)*d.size*.52:d.size*1.05)
+         .text(line=>line);
+     });
    labels.each(function(d){
      const x=projection(d.point)[0]+offset;
      const y=projection(d.point)[1];
-     // Approximate label width at the unscaled viewBox size; sufficient to prevent edge clipping.
-     const width=Math.max(d.name.length*d.size*.59, d.size*4);
-     oceanLabelNodes.push({node:this,x,y,width});
+     const lines=d.lines||[d.name];
+     const width=Math.max(...lines.map(line=>line.length*d.size*.56),d.size*4);
+     const height=d.size*Math.max(1,lines.length)*1.1;
+     oceanLabelNodes.push({node:this,x,y,width,height});
    });
  });
  function updateOceanLabels(transform){
@@ -214,11 +245,11 @@ function setupMap(validFeatures){
      const x=transform.x+transform.k*item.x;
      const y=transform.y+transform.k*item.y;
      const half=transform.k*item.width/2;
-     const whollyVisible=(x-half>=viewLeft && x+half<=viewRight && y>=viewTop && y<=viewBottom);
+     const halfHeight=transform.k*item.height/2;
+     const whollyVisible=(x-half>=viewLeft && x+half<=viewRight && y-halfHeight>=viewTop && y+halfHeight<=viewBottom);
      item.node.style.display=whollyVisible?'':'none';
    }
  }
- const countryFeatures=features.filter(f=>f.geometry);
  pathSelection=copies.selectAll('path').data(countryFeatures).join('path')
   .attr('class',f=>'country-shape'+(selected.has(idOf(f.id))?' selected':''))
   .attr('d',path).attr('data-id',f=>idOf(f.id)).attr('role','button').attr('tabindex',0)
@@ -287,6 +318,13 @@ async function start(){
    const entry={id,en:displayedEn,sourceEn:canonical,ru,continent,isState};
    entries.push(entry);f.__trackerEntry=entry;validFeatures.push(f);
   }
+  // Keep a country in the reference list even when a very small island state has no polygon in the generalized map source.
+  const missingStateShapeIds=[...REQUIRED_STATE_IDS].filter(id=>!seenIds.has(id));
+  for(const id of missingStateShapeIds){
+   const en=STATE_FALLBACK_NAME_BY_ID[id]||('Государство (код '+id+')');
+   const continent=STATE_CONTINENT_BY_ID.get(id)||'Не определён';
+   entries.push({id,en,sourceEn:en,ru:ruName(en),continent,isState:true,mapGeometryMissing:true});
+  }
   // Keep entries themselves ordered consistently too, so every list/export source starts alphabetically.
   entries.sort((a,b)=>a.ru.localeCompare(b.ru,'ru',{sensitivity:'base'})||a.ru.localeCompare(b.ru,'ru')||a.id.localeCompare(b.id,'en'));
   entryById=new Map(entries.map(e=>[e.id,e]));
@@ -296,13 +334,15 @@ async function start(){
   setupMap(validFeatures);buildList();updateStorage();
   const found=[...REQUIRED_STATE_IDS].filter(id=>entryById.has(id)).length;
   const missing=REQUIRED_STATE_IDS.size-found;
+  const missingShapeEntries=entries.filter(e=>e.isState&&e.mapGeometryMissing);
+  const missingShapeNames=missingShapeEntries.map(e=>e.ru+' (код '+e.id+')').join(', ');
   const unclassifiedContinents=entries.filter(e=>e.continent==='Не определён').length;
   const audit=$('#audit-note');
   const missingStateContinentCodes=UNMAPPED_STATE_CONTINENT_CODES.length;
   const duplicateStateCodeAssignments=DUPLICATE_STATE_CONTINENT_CODES.size;
-  if(missing||duplicateIds||emptyNames||duplicateNames||badGeometry||unclassifiedContinents||missingStateContinentCodes||duplicateStateCodeAssignments){
+  if(missing||missingShapeEntries.length||duplicateIds||emptyNames||duplicateNames||badGeometry||unclassifiedContinents||missingStateContinentCodes||duplicateStateCodeAssignments){
    audit.classList.add('warning');
-   audit.textContent='Проверка данных: '+found+'/195 государств найдено; отсутствует государств в данных: '+missing+'; повторных ID: '+duplicateIds+'; повторных названий уточнено кодом: '+duplicateNames+'; объектов без имени: '+emptyNames+'; ошибок координат/замыкания границ: '+badGeometry+'; объектов без континента: '+unclassifiedContinents+'; кодов государств без континентальной классификации: '+missingStateContinentCodes+'; конфликтов классификации: '+duplicateStateCodeAssignments+'.';
+   audit.textContent='Проверка данных: '+found+'/195 государств найдено; отсутствует государств в данных: '+missing+'; повторных ID: '+duplicateIds+'; повторных названий уточнено кодом: '+duplicateNames+'; объектов без имени: '+emptyNames+'; ошибок координат/замыкания границ: '+badGeometry+'; объектов без континента: '+unclassifiedContinents+'; кодов государств без континентальной классификации: '+missingStateContinentCodes+'; конфликтов классификации: '+duplicateStateCodeAssignments+'. '+(missingShapeEntries.length?'Без геометрии на карте (но есть в списке): '+missingShapeNames+'.':'');
   }else{
    audit.classList.remove('warning');
    audit.textContent='Проверка завершена: все 195 государств присутствуют; кодовая классификация континентов полная; ID уникальны; ошибок координат/замыкания границ: 0; '+entries.length+' контуров стран и территорий. Источник: Natural Earth TopoJSON.';
@@ -314,6 +354,7 @@ function showError(title,help){$('#map-status').textContent='Ошибка заг
 $('#search').addEventListener('input',applyFilter);
 document.querySelectorAll('.filter-btn').forEach(btn=>btn.addEventListener('click',()=>{currentFilter=btn.dataset.filter;document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b===btn));applyFilter();}));
 document.querySelectorAll('.scope-btn').forEach(btn=>btn.addEventListener('click',()=>{currentScope=btn.dataset.scope;document.querySelectorAll('.scope-btn').forEach(b=>b.classList.toggle('active',b===btn));updateUI();}));
+$('#clear-continent').addEventListener('click',()=>{currentContinent=null;updateUI();});
 $('#clear').addEventListener('click',()=>{if(!selected.size)return;if(confirm('Снять отметки со всех стран?')){selected.clear();updateStorage();updateUI();$('#map-status').textContent='Все отметки сняты';}});
 function downloadBlob(blob,filename){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);}
 $('#export').addEventListener('click',()=>{
