@@ -179,7 +179,7 @@ const normalizeId=v=>String(v??'').replace(/^0+(?=\d)/,'');
 let entries=[], entryById=new Map(), selected=new Set(), features=[], pathSelection=null, markerSelection=null, worldSvg=null, zoomBehavior=null, currentFilter='all', currentScope='states', currentContinent=null, storageFailed=false;
 let loadStarted=false;
 try{const saved=JSON.parse(localStorage.getItem(STORE_KEY)||'[]');if(Array.isArray(saved))selected=new Set(saved.map(String));}catch(e){}
-function translationKey(value){return String(value||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').normalize('NFKC').toLocaleLowerCase('ru').replace(/[’']/g,"'").replace(/[^\\p{L}\\p{N}]+/gu,' ').trim();}
+function translationKey(value){return String(value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').normalize('NFKC').toLocaleLowerCase('ru').replace(/[’']/g,"'").replace(/[^\p{L}\p{N}]+/gu,' ').trim();}
 const RU_NORMALIZED=new Map(Object.entries(RU).map(([key,value])=>[translationKey(key),value]));
 function ruName(name){return RU[name]||RU_NORMALIZED.get(translationKey(name))||name;}
 function escapeText(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
