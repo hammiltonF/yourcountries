@@ -169,7 +169,7 @@ function updateUI(){const scopedEntries=entries.filter(e=>currentScope==='all'||
 function renderContinentStats(){
  const host=$('#continent-grid');if(!host||!entries.length)return;host.innerHTML='';const frag=document.createDocumentFragment();
  for(const c of CONTINENTS){const group=entries.filter(e=>(currentScope==='all'||e.isState)&&e.continent===c.label);const done=group.filter(e=>selected.has(e.id)).length;const pct=group.length?Math.round(done/group.length*100):0;
-  const card=document.createElement('button');card.type='button';card.className='continent-card'+(currentContinent===c.label?' active':'');card.setAttribute('aria-pressed',currentContinent===c.label?'true':'false');card.setAttribute('aria-label','Показать страны и территории региона: '+c.label);card.addEventListener('click',()=>{currentContinent=currentContinent===c.label?null:c.label;updateUI();});
+  const card=document.createElement('button');card.type='button';card.className='continent-card'+(currentContinent===c.label?' active':'');card.setAttribute('aria-pressed',currentContinent===c.label?'true':'false');card.setAttribute('aria-label','Показать страны и территории региона: '+c.label);card.addEventListener('click',()=>{currentContinent=currentContinent===c.label?null:c.label;updateUI();if(window.matchMedia('(max-width:900px)').matches)$('#list-scope-label').scrollIntoView({behavior:'smooth',block:'start'});});
   const top=document.createElement('div');top.className='continent-card-top';
   const name=document.createElement('span');name.className='continent-name';name.textContent=c.label;
   const count=document.createElement('span');count.className='continent-count';count.textContent=done+' / '+group.length;
