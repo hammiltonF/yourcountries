@@ -103,6 +103,7 @@ const SHARED_CONTINENT_STATE_IDS={
  '360':['Океания']               // Indonesia: eastern islands straddle the Asia–Oceania boundary
 };
 
+const MAP_FALLBACK_POINTS={'798':{point:[179.2,-8.5],label:'Тувалу'}};
 const OCEANS=[
  {name:'Тихий океан',lines:['Тихий океан'],candidates:[[-155,0],[-150,-15],[-145,18],[-135,5]],size:13},
  {name:'Тихий океан',lines:['Тихий океан'],candidates:[[155,0],[160,-15],[150,18],[145,-25]],size:13},
@@ -137,7 +138,7 @@ function continentsFor(id,en){
 }
 
 const normalizeId=v=>String(v??'').replace(/^0+(?=\d)/,'');
-let entries=[], entryById=new Map(), selected=new Set(), features=[], pathSelection=null, worldSvg=null, zoomBehavior=null, currentFilter='all', currentScope='states', currentContinent=null, storageFailed=false;
+let entries=[], entryById=new Map(), selected=new Set(), features=[], pathSelection=null, markerSelection=null, worldSvg=null, zoomBehavior=null, currentFilter='all', currentScope='states', currentContinent=null, storageFailed=false;
 let loadStarted=false;
 try{const saved=JSON.parse(localStorage.getItem(STORE_KEY)||'[]');if(Array.isArray(saved))selected=new Set(saved.map(String));}catch(e){}
 function ruName(name){return RU[name]||name;}
@@ -171,7 +172,7 @@ function buildList(){const list=$('#country-list');list.innerHTML='';const frag=
   const label=document.createElement('label');label.className='country-row';label.dataset.id=e.id;label.dataset.state=e.isState?'true':'false';label.dataset.continents=(e.continents||[e.continent]).filter(Boolean).join('|');label.dataset.name=(e.ru+' '+e.en).toLocaleLowerCase('ru');
   const cb=document.createElement('input');cb.type='checkbox';cb.checked=selected.has(e.id);cb.setAttribute('aria-label','Посещена: '+e.ru);cb.dataset.id=e.id;
   const name=document.createElement('span');name.className='country-name';name.textContent=e.ru;
-  if(e.ru!==e.en){const original=document.createElement('span');original.className='country-original';original.textContent=e.en;name.append(original);}if(e.mapGeometryMissing){const missingShape=document.createElement('span');missingShape.className='country-map-missing';missingShape.textContent='Нет контура на карте — можно отметить в списке';name.append(missingShape);}
+  if(e.ru!==e.en){const original=document.createElement('span');original.className='country-original';original.textContent=e.en;name.append(original);}if(e.mapGeometryMissing){const missingShape=document.createElement('span');missingShape.className='country-map-missing';missingShape.textContent=MAP_FALLBACK_POINTS[e.id]?'На карте отмечено точкой: граница слишком мала для масштаба':'Нет контура на карте — можно отметить в списке';name.append(missingShape);}
   const badge=document.createElement('span');badge.className='checked-label';badge.textContent=selected.has(e.id)?'ВЫБРАНА':'';
   cb.addEventListener('change',()=>toggle(e.id));
   label.append(cb,name,badge);frag.append(label);
@@ -192,6 +193,7 @@ function updateUI(){const scopedEntries=entries.filter(e=>currentScope==='all'||
  $('#stats-note').textContent=count===0?'Отмечай '+(currentScope==='states'?'государства':'страны и территории')+', в которых ты уже был.':count===total?'Готово — все объекты выбранного списка отмечены!':'Отмечено '+count+' из '+total+' '+unit+'.';
  document.querySelectorAll('.country-row').forEach(row=>{const id=row.dataset.id,yes=selected.has(id),cb=row.querySelector('input'),badge=row.querySelector('.checked-label');if(cb)cb.checked=yes;if(badge)badge.textContent=yes?'ВЫБРАНА':'';});
  if(pathSelection)pathSelection.classed('selected',f=>selected.has(idOf(f.id))).classed('scope-muted',f=>currentScope==='states'&&!REQUIRED_STATE_IDS.has(idOf(f.id))).attr('aria-pressed',f=>selected.has(idOf(f.id))?'true':'false');
+ if(markerSelection)markerSelection.classed('selected',e=>selected.has(e.id)).attr('aria-pressed',e=>selected.has(e.id)?'true':'false');
  renderContinentStats();applyFilter();updateSaveStatus();
 }
 function renderContinentStats(){
@@ -286,6 +288,16 @@ function setupMap(validFeatures){
   .on('click',(event,f)=>{event.stopPropagation();if(entryById.has(idOf(f.id)))toggle(idOf(f.id));})
   .on('keydown',(event,f)=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();if(entryById.has(idOf(f.id)))toggle(idOf(f.id));}});
  pathSelection.append('title').text(f=>(entryById.get(idOf(f.id))||{ru:ruName((f.properties||{}).name||'Страна')}).ru);
+ const pointEntries=entries.filter(e=>e.mapGeometryMissing&&MAP_FALLBACK_POINTS[e.id]);
+ markerSelection=copies.selectAll('circle.country-fallback-marker').data(pointEntries,e=>e.id).join('circle')
+  .attr('class',e=>'country-shape country-fallback-marker'+(selected.has(e.id)?' selected':''))
+  .attr('cx',e=>projection(MAP_FALLBACK_POINTS[e.id].point)[0])
+  .attr('cy',e=>projection(MAP_FALLBACK_POINTS[e.id].point)[1])
+  .attr('r',3.5).attr('role','button').attr('tabindex',0)
+  .attr('aria-label',e=>e.ru).attr('aria-pressed',e=>selected.has(e.id)?'true':'false')
+  .on('click',(event,e)=>{event.stopPropagation();toggle(e.id);})
+  .on('keydown',(event,e)=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();toggle(e.id);}});
+ markerSelection.append('title').text(e=>e.ru);
  // Keep ocean labels above country fills/outlines so coastlines never cut through the lettering.
  copies.selectAll('.ocean-labels').raise();
  // A wider zoom range lets the user inspect small countries. Horizontal translation wraps by one world width.
@@ -301,6 +313,7 @@ function setupMap(validFeatures){
      return;
    }
    root.attr('transform',t);
+   if(markerSelection)markerSelection.attr('r',3.5/t.k);
    updateOceanLabels(t);
  });
  svg.call(zoomBehavior).on('dblclick.zoom',null);
@@ -336,18 +349,30 @@ async function start(){
   for(const f of raw){
    if(!f.geometry||f.id===undefined||f.id===null)continue;
    badGeometry+=geometryIssues(f.geometry);
-   const id=idOf(f.id);if(seenIds.has(id)){duplicateIds++;continue;}seenIds.add(id);
-   const en=fallbackNameFromFeature(f).trim();if(!en||/^Страна\s/.test(en))emptyNames++;
-   const canonical=en||('Объект '+id);const nk=nameKey(canonical);const duplicateName=seenNames.has(nk);
+   const sourceId=idOf(f.id);
+   const en=fallbackNameFromFeature(f).trim();
+   let id=sourceId;
+   if(seenIds.has(sourceId)){
+    // Keep every geometric object: duplicate source IDs are renamed locally, not dropped.
+    duplicateIds++;
+    const slug=nameKey(en).replace(/[^\\p{L}\\p{N}]+/gu,'-').replace(/^-|-$/g,'')||'object';
+    const base='object-'+sourceId+'-'+slug;id=base;let suffix=2;
+    while(seenIds.has(id)){id=base+'-'+suffix;suffix++;}
+    f.id=id;
+   }
+   seenIds.add(sourceId);seenIds.add(id);
+   if(!en||/^Страна\\s/.test(en))emptyNames++;
+   const canonical=en||('Объект '+sourceId);const nk=nameKey(canonical);const duplicateName=seenNames.has(nk);
    if(duplicateName)duplicateNames++;else seenNames.set(nk,id);
-   const displayedEn=duplicateName?canonical+' ('+id+')':canonical;
-   const ru=ruName(canonical)+(duplicateName?' ('+id+')':'');
+   const displayedEn=duplicateName?canonical+' (объект '+id+')':canonical;
+   const ru=ruName(canonical)+(duplicateName?' (объект '+id+')':'');
    const continents=continentsFor(id,canonical);const continent=continents[0]||'Не определён';const isState=REQUIRED_STATE_IDS.has(id);
-   const entry={id,en:displayedEn,sourceEn:canonical,ru,continent,continents,isState,feature:f};
+   const entry={id,sourceId,en:displayedEn,sourceEn:canonical,ru,continent,continents,isState,feature:f};
    entries.push(entry);f.__trackerEntry=entry;validFeatures.push(f);
   }
   // Keep a country in the reference list even when a very small island state has no polygon in the generalized map source.
-  const missingStateShapeIds=[...REQUIRED_STATE_IDS].filter(id=>!seenIds.has(id));
+  const representedStateIds=new Set(entries.filter(e=>e.isState).map(e=>e.id));
+  const missingStateShapeIds=[...REQUIRED_STATE_IDS].filter(id=>!representedStateIds.has(id));
   for(const id of missingStateShapeIds){
    const en=STATE_FALLBACK_NAME_BY_ID[id]||('Государство (код '+id+')');
    const continents=continentsFor(id,en);const continent=continents[0]||'Не определён';
@@ -360,20 +385,23 @@ async function start(){
   selected=new Set([...selected].filter(id=>entryById.has(String(id))));
   savedLegacyMigration();
   setupMap(validFeatures);buildList();updateStorage();
-  const found=[...REQUIRED_STATE_IDS].filter(id=>entryById.has(id)).length;
+  const presentStateIds=new Set(entries.filter(e=>e.isState).map(e=>e.id));
+  const found=[...REQUIRED_STATE_IDS].filter(id=>presentStateIds.has(id)).length;
   const missing=REQUIRED_STATE_IDS.size-found;
   const missingShapeEntries=entries.filter(e=>e.isState&&e.mapGeometryMissing);
   const missingShapeNames=missingShapeEntries.map(e=>e.ru+' (код '+e.id+')').join(', ');
-  const unclassifiedContinents=entries.filter(e=>e.continent==='Не определён').length;
+  const unclassifiedEntries=entries.filter(e=>!(e.continents||[]).length);
+  const unclassifiedContinents=unclassifiedEntries.length;
+  const unclassifiedNames=unclassifiedEntries.map(e=>e.ru+' ['+(e.sourceId||e.id)+']').join(', ');
   const audit=$('#audit-note');
   const missingStateContinentCodes=UNMAPPED_STATE_CONTINENT_CODES.length;
   const duplicateStateCodeAssignments=DUPLICATE_STATE_CONTINENT_CODES.size;
-  if(missing||missingShapeEntries.length||duplicateIds||emptyNames||duplicateNames||badGeometry||unclassifiedContinents||missingStateContinentCodes||duplicateStateCodeAssignments){
+  if(missing||missingShapeEntries.length||emptyNames||badGeometry||unclassifiedContinents||missingStateContinentCodes||duplicateStateCodeAssignments){
    audit.classList.add('warning');
-   audit.textContent='Проверка данных: '+found+'/195 государств найдено; отсутствует государств в данных: '+missing+'; повторных ID: '+duplicateIds+'; повторных названий уточнено кодом: '+duplicateNames+'; объектов без имени: '+emptyNames+'; ошибок координат/замыкания границ: '+badGeometry+'; объектов без континента: '+unclassifiedContinents+'; кодов государств без континентальной классификации: '+missingStateContinentCodes+'; конфликтов классификации: '+duplicateStateCodeAssignments+'. '+(missingShapeEntries.length?'Без геометрии на карте (но есть в списке): '+missingShapeNames+'.':'');
+   audit.textContent='Проверка данных: '+found+'/195 государств найдено; отсутствует государств в данных: '+missing+'; повторяющихся ID источника сохранено отдельно: '+duplicateIds+'; названий с уточнением: '+duplicateNames+'; объектов без имени: '+emptyNames+'; ошибок координат/замыкания границ: '+badGeometry+'; объектов без континента: '+unclassifiedContinents+(unclassifiedContinents?' ('+unclassifiedNames+')':'')+'; кодов государств без континентальной классификации: '+missingStateContinentCodes+'; конфликтов классификации: '+duplicateStateCodeAssignments+'. '+(missingShapeEntries.length?'Обозначены точкой или остаются в списке без контура: '+missingShapeNames+'.':'');
   }else{
    audit.classList.remove('warning');
-   audit.textContent='Проверка завершена: все 195 государств присутствуют; кодовая классификация континентов полная; ID уникальны; ошибок координат/замыкания границ: 0; '+entries.length+' контуров стран и территорий. Источник: Natural Earth TopoJSON.';
+   audit.textContent='Проверка завершена: все 195 государств присутствуют; кодовая классификация континентов полная; исходных повторяющихся ID обработано отдельно: '+duplicateIds+'; ошибок координат/замыкания границ: 0; '+entries.length+' объектов и территорий. Источник: Natural Earth TopoJSON.';
   }
   $('#map-status').textContent='Карта готова · '+entries.length+' уникальных объектов';
  }catch(e){console.error(e);showError('Не удалось загрузить карту мира.','Не получилось загрузить данные карты из сети. Проверь подключение к интернету и обнови страницу. Твои резервные копии не затрагиваются.');}
